@@ -12,6 +12,9 @@ public class Movement : MonoBehaviour {
 	float verspeed;
 	public GameObject gameController;
 	public Gamemode gm;
+	float t1,t2;		//用来判断双击的时间，其中t2用来显示当前的时间，t1用来保存第一次敲击的时间
+
+	delegate void helper();
 	
 
 
@@ -23,6 +26,7 @@ public class Movement : MonoBehaviour {
 	void Update () {
 		//ShiftMode();
 		Move();
+		DoubleClick(KeyCode.F);
 	}
 
 	void changeMesh(){
@@ -64,6 +68,18 @@ public class Movement : MonoBehaviour {
 	void ShiftMode(){
 		if(Input.GetKeyDown(KeyCode.Y)){
 			gm.ChangeGameMode();
+		}
+	}
+
+	void DoubleClick(KeyCode keyCode){
+		if(Input.GetKeyDown(keyCode)){    
+            t2 = Time.realtimeSinceStartup;    
+            if(t2 - t1 < 0.2){    
+                print("double click");    
+            }    
+            t1 = t2;
+        }else if(Input.GetKeyUp(keyCode)){
+			
 		}
 	}
 }

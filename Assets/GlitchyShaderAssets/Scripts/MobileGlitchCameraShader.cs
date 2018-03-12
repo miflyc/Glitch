@@ -7,7 +7,7 @@ public class MobileGlitchCameraShader : MonoBehaviour
 {
 
     private Material material;
-
+    public Shader m_Shader;
     public float GlitchInterval = 5f;
     [Range(0, 1)]
     public float GlitchRate = 0.9f;
@@ -34,7 +34,8 @@ public class MobileGlitchCameraShader : MonoBehaviour
     {
         if (material == null)
         {
-            material = new Material(Shader.Find("Custom/Mobile Glitchy Footage Shader"));
+            // material = new Material(Shader.Find("Custom/Mobile Glitchy Footage Shader"));
+            material = new Material(m_Shader);
             material.hideFlags = HideFlags.HideAndDontSave;
         }
     }
@@ -42,7 +43,8 @@ public class MobileGlitchCameraShader : MonoBehaviour
     {
         if (material == null)
         {
-            material = new Material(Shader.Find("Custom/Mobile Glitchy Footage Shader"));
+            // material = new Material(Shader.Find("Custom/Mobile Glitchy Footage Shader"));
+            material = new Material(m_Shader);
             material.hideFlags = HideFlags.HideAndDontSave;
         }
     }
