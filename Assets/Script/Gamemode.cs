@@ -35,17 +35,17 @@ public class Gamemode : MonoBehaviour {
 
 	public void ChangeGameMode(){
 		gameMode=!gameMode;
-		StartCoroutine(Example());
+		StartCoroutine(GlitchEffect());
 	}
 
 	public void Glitch(){
 		glitchShader.enabled = !glitchShader.enabled;
 	}
 
-	IEnumerator Example()
+	IEnumerator GlitchEffect()
     {
 		Glitch();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
 		Glitch();
     }
 }
