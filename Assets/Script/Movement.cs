@@ -21,7 +21,7 @@ public class Movement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		shiftMode();
+		//ShiftMode();
 		Move();
 	}
 
@@ -30,7 +30,7 @@ public class Movement : MonoBehaviour {
 	}
 
 	void rua(){
-
+		
 	}
 
 	void Move(){
@@ -42,10 +42,10 @@ public class Movement : MonoBehaviour {
 		}
 		horspeed =Input.GetAxis("Horizontal")*speed;
 		verspeed = Input.GetAxis("Vertical")*speed;
-		float 左右 = horspeed;
-		float 上下 = verspeed;
-		左右 *= Time.deltaTime;
-		上下 *= Time.deltaTime;
+		float zuoyou = horspeed;
+		float shangxia = verspeed;
+		zuoyou *= Time.deltaTime;
+		shangxia *= Time.deltaTime;
 		if(th>0){
 			th-= speedDown;
 		}
@@ -58,10 +58,10 @@ public class Movement : MonoBehaviour {
 		else{
 			tv = 0;
 		}
-		transform.Translate(左右,上下,0);
+		transform.Translate(zuoyou,shangxia,0);
 	}
 
-	void shiftMode(){
+	void ShiftMode(){
 		if(Input.GetKeyDown(KeyCode.Y)){
 			gm.ChangeGameMode();
 		}

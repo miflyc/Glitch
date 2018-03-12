@@ -6,10 +6,13 @@ public class Gamemode : MonoBehaviour {
 
 	public bool gameMode = false;
 	public GameObject inside;
+	MobileGlitchCameraShader glitchShader;
 
 	// Use this for initialization
 	void Start () {
 		gameMode = false;
+		glitchShader = GetComponent<MobileGlitchCameraShader>();
+		glitchShader.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -25,10 +28,24 @@ public class Gamemode : MonoBehaviour {
 		}
 		if(Input.GetKeyDown(KeyCode.C)){
 			ChangeGameMode();
+		}else if(Input.GetKeyDown(KeyCode.R)){
+			Glitch();
 		}
 	}
 
 	public void ChangeGameMode(){
 		gameMode=!gameMode;
+		StartCoroutine(Example());
 	}
+
+	public void Glitch(){
+		glitchShader.enabled = !glitchShader.enabled;
+	}
+
+	IEnumerator Example()
+    {
+		Glitch();
+        yield return new WaitForSeconds(2);
+		Glitch();
+    }
 }
