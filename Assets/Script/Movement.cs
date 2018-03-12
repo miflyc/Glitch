@@ -12,16 +12,25 @@ public class Movement : MonoBehaviour {
 	float verspeed;
 	public GameObject gameController;
 	public Gamemode gm;
+	
 
 
 	// Use this for initialization
-	void Start () {
+	void Start (){
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		shiftMode();
 		Move();
+	}
+
+	void changeMesh(){
+		
+	}
+
+	void rua(){
+
 	}
 
 	void Move(){
@@ -33,10 +42,10 @@ public class Movement : MonoBehaviour {
 		}
 		horspeed =Input.GetAxis("Horizontal")*speed;
 		verspeed = Input.GetAxis("Vertical")*speed;
-		float zuoyou = horspeed;
-		float shangxia = verspeed;
-		zuoyou *= Time.deltaTime;
-		shangxia *= Time.deltaTime;
+		float 左右 = horspeed;
+		float 上下 = verspeed;
+		左右 *= Time.deltaTime;
+		上下 *= Time.deltaTime;
 		if(th>0){
 			th-= speedDown;
 		}
@@ -49,7 +58,7 @@ public class Movement : MonoBehaviour {
 		else{
 			tv = 0;
 		}
-		transform.Translate(zuoyou,shangxia,0);
+		transform.Translate(左右,上下,0);
 	}
 
 	void shiftMode(){

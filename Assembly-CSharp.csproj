@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{705F5E3C-418D-C260-A21E-1400EFC02616}</ProjectGuid>
+    <ProjectGuid>{9778B948-5F66-51B8-1A1B-92D98A42F29D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -46,8 +46,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\GlitchyShaderAssets\Scripts\GlitchCameraShader.cs" />
+     <Compile Include="Assets\GlitchyShaderAssets\Scripts\MobileGlitchCameraShader.cs" />
+     <Compile Include="Assets\GlitchyShaderAssets\Scripts\SimpleRotator.cs" />
      <Compile Include="Assets\Script\Gamemode.cs" />
      <Compile Include="Assets\Script\Movement.cs" />
+     <None Include="Assets\GlitchyShaderAssets\Shaders\noiseSimplex.cginc" />
+     <None Include="Assets\GlitchyShaderAssets\Shaders\MobileGlitchCameraShader.shader" />
+     <None Include="Assets\GlitchyShaderAssets\Shaders\GlitchCameraShader.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity3D/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

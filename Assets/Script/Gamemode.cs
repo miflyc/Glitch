@@ -29,10 +29,6 @@ public class Gamemode : MonoBehaviour {
 	}
 
 	public void ChangeGameMode(){
-		if(gameMode){
-			gameMode = false;
-		}else{
-			gameMode = true;
-		}
+		gameMode=!gameMode;
 	}
 }
