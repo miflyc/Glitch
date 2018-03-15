@@ -34,4 +34,5 @@ public class NPCListener : MonoBehaviour {
 			talk = false;
 		}
 	}
+
 }

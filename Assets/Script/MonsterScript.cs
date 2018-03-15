@@ -6,6 +6,7 @@ public class MonsterScript : MonoBehaviour {
 
 	public int countDown;
 
+
 	// Use this for initialization
 	void Start () {
 		
@@ -13,26 +14,27 @@ public class MonsterScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
-	void OnCollisionEnter2D(Collision2D visitor)
+	void OnTriggerEnter2D(Collider2D Visitor)
 	{
-		if(visitor.gameObject.tag == "PlayerField"){
+		if(Visitor.gameObject.tag == "PlayerField"){
 			Debug.Log("Warning");
 			Attack();
 		}
 	}
 
+	
 	IEnumerator Prepare(int times){
-		for(int i = times;i>0;i--){
-			Debug.Log(i);
-			yield return new WaitForSeconds(1);
-		}
+		Debug.Log(times);
+		yield return new WaitForSeconds(1);
 	}
 
 	void Attack(){
-		StartCoroutine(Prepare(countDown));
+		for(int i = countDown;i>0;i--){
+			StartCoroutine(Prepare(i));
+		}
 		Debug.Log("Attack");
 	}
 }
