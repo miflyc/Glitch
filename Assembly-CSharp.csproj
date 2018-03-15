@@ -52,6 +52,8 @@
      <Compile Include="Assets\Script\CameraControll.cs" />
      <Compile Include="Assets\Script\GameControl.cs" />
      <Compile Include="Assets\Script\Gamemode.cs" />
+     <Compile Include="Assets\Script\MonsterScript.cs" />
+     <Compile Include="Assets\Script\NPCListener.cs" />
      <Compile Include="Assets\Script\PlayerControl.cs" />
      <Compile Include="Assets\Script\PlayerStateListener.cs" />
      <None Include="Assets\GlitchyShaderAssets\Shaders\noiseSimplex.cginc" />
