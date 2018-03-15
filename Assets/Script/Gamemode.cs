@@ -5,7 +5,6 @@ using UnityEngine;
 public class Gamemode : MonoBehaviour {
 
 	public bool gameMode = false;
-	public GameObject inside;
 	MobileGlitchCameraShader glitchShader;
 
 	// Use this for initialization
@@ -17,19 +16,8 @@ public class Gamemode : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(gameMode){
-			if(inside.activeInHierarchy == false){
-				inside.SetActive(true);
-			}
-		}else{
-			if(inside.activeInHierarchy == true){
-				inside.SetActive(false);
-			}
-		}
 		if(Input.GetKeyDown(KeyCode.C)){
 			ChangeGameMode();
-		}else if(Input.GetKeyDown(KeyCode.R)){
-			Glitch();
 		}
 	}
 

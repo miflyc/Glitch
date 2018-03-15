@@ -19,6 +19,7 @@ public class PlayerControl : MonoBehaviour {
 	public playerStates currState = playerStates.falling;
 	public float jumpForce = 100.0f;
 	delegate void helper();		//用来提供函数借口的委托函数
+	public SpriteRenderer white,black;
 	
 
 
@@ -30,7 +31,7 @@ public class PlayerControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		ShiftMode();
 	}
 
 	void FixedUpdate()
@@ -94,6 +95,16 @@ public class PlayerControl : MonoBehaviour {
 				currState = playerStates.landing;
 				speed = baseSpeed;
 			}
+		}
+	}
+
+	void ShiftMode(){
+		if(gm.gameMode == true){
+			black.enabled = false;
+			white.enabled = true;
+		}else{
+			black.enabled = true;
+			white.enabled = false;
 		}
 	}
 }
