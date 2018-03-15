@@ -49,8 +49,11 @@
      <Compile Include="Assets\GlitchyShaderAssets\Scripts\GlitchCameraShader.cs" />
      <Compile Include="Assets\GlitchyShaderAssets\Scripts\MobileGlitchCameraShader.cs" />
      <Compile Include="Assets\GlitchyShaderAssets\Scripts\SimpleRotator.cs" />
+     <Compile Include="Assets\Script\CameraControll.cs" />
+     <Compile Include="Assets\Script\GameControl.cs" />
      <Compile Include="Assets\Script\Gamemode.cs" />
-     <Compile Include="Assets\Script\Movement.cs" />
+     <Compile Include="Assets\Script\PlayerControl.cs" />
+     <Compile Include="Assets\Script\PlayerStateListener.cs" />
      <None Include="Assets\GlitchyShaderAssets\Shaders\noiseSimplex.cginc" />
      <None Include="Assets\GlitchyShaderAssets\Shaders\MobileGlitchCameraShader.shader" />
      <None Include="Assets\GlitchyShaderAssets\Shaders\GlitchCameraShader.shader" />
