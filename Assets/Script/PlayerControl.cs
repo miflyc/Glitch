@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour {
 	
-	public float baseSpeed;
+	public float baseSpeed,attackRange;
 	float speed;
 	public Rigidbody2D rb;
-	public GameObject gameController;
+	public GameObject gameController,crasherCollider;
 	public Gamemode gm;
 	float t1,t2;		//用来判断双击的时间，其中t2用来显示当前的时间，t1用来保存第一次敲击的时间
 	public enum playerStates{		//角色状态机
@@ -20,6 +20,7 @@ public class PlayerControl : MonoBehaviour {
 	public float jumpForce = 100.0f;
 	delegate void helper();		//用来提供函数借口的委托函数
 	public SpriteRenderer white,black;
+	public Crasher crasher;
 	
 
 
@@ -40,6 +41,7 @@ public class PlayerControl : MonoBehaviour {
 		DoubleClick(KeyCode.F);
 		Run();
 		Jump();
+		AtkCondition2(attackRange,1);
 	}
 
 	void LateUpdate () {
@@ -51,6 +53,7 @@ public class PlayerControl : MonoBehaviour {
 	}
 
 	void rua(){						//向前冲刺并发起攻击
+		crasher.enabled = true;
 		
 	}
 
@@ -107,4 +110,21 @@ public class PlayerControl : MonoBehaviour {
 			white.enabled = false;
 		}
 	}
+
+	private void AtkCondition2(float _range,float _angle)  
+	{  
+		if(Input.GetAxis("Fire1")!=0)
+		{// 球形射线检测周围怪物，不用循环所有怪物类列表，无法获取“Enemy”类  
+		Collider[] colliderArr = Physics.OverlapSphere(transform.position, _range, LayerMask.GetMask("Enemy"));  
+		for (int i = 0; i < colliderArr.Length; i++)  
+		{  
+			Vector3 v3 = colliderArr[i].gameObject.transform.position - transform.position;  
+			float angle = Vector3.Angle(v3, transform.forward);  
+			if (angle < _angle)  
+			{  
+				// 距离和角度条件都满足了  
+			}  
+		}  
+		transform.Translate(new Vector3(3.0f,0.0f,0.0f));}
+	}  
 }
