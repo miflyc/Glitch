@@ -50,7 +50,6 @@
      <Compile Include="Assets\GlitchyShaderAssets\Scripts\MobileGlitchCameraShader.cs" />
      <Compile Include="Assets\GlitchyShaderAssets\Scripts\SimpleRotator.cs" />
      <Compile Include="Assets\Script\Camera2DFollow.cs" />
-     <Compile Include="Assets\Script\Crasher.cs" />
      <Compile Include="Assets\Script\Enemy.cs" />
      <Compile Include="Assets\Script\GameControl.cs" />
      <Compile Include="Assets\Script\Gamemode.cs" />
