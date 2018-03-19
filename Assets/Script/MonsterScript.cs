@@ -21,20 +21,19 @@ public class MonsterScript : MonoBehaviour {
 	{
 		if(Visitor.gameObject.tag == "PlayerField"){
 			Debug.Log("Warning");
-			Attack();
+			StartCoroutine(Attack(countDown));
 		}
 	}
 
 	
-	IEnumerator Prepare(int times){
-		Debug.Log(times);
-		yield return new WaitForSeconds(1);
+	IEnumerator Attack(int times){
+		if(times>0){
+			Debug.Log(times);
+			yield return new WaitForSeconds(1);
+			StartCoroutine(Attack(times-1));
+		}else{
+			Debug.Log("Attack");
+		}
 	}
 
-	void Attack(){
-		for(int i = countDown;i>0;i--){
-			StartCoroutine(Prepare(i));
-		}
-		Debug.Log("Attack");
-	}
 }

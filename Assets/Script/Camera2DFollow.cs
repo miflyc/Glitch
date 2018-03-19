@@ -30,7 +30,6 @@ namespace UnityStandardAssets._2D
         {
             // only update lookahead pos if accelerating or changed direction
             float xMoveDelta = (target.position - m_LastTargetPosition).x;
-
             bool updateLookAheadTarget = Mathf.Abs(xMoveDelta) > lookAheadMoveThreshold;
 
             if (updateLookAheadTarget)
