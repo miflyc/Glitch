@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections;
 
 namespace UnityStandardAssets._2D
 {
@@ -48,5 +49,6 @@ namespace UnityStandardAssets._2D
 
             m_LastTargetPosition = target.position;
         }
+
     }
 }
