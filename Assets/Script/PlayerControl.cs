@@ -4,22 +4,30 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour {
 	
-	public float baseSpeed,attackRange;
+	public float baseSpeed,attackRange,gap;
 	float speed;
 	public Rigidbody2D rb;
 	public GameObject gameController,crasherCollider;
 	public Gamemode gm;
-	float t1,t2;		//用来判断双击的时间，其中t2用来显示当前的时间，t1用来保存第一次敲击的时间
+	float t1,t2;		//用来判断双击的时间，其中t2用来显示当前的时间，t1用来保存第一次敲击的时
+	float triplet1,triplet2,triplet3;	//三段斩时间判定
 	public enum playerStates{		//角色状态机
 		jump,
 		falling,
 		landing,
 		running
 	}
+	public enum AttackStyle{
+		rua,
+		triplet1,
+		triplet2,
+		triplet3,
+	}
 	public playerStates currState = playerStates.falling;
 	public float jumpForce = 100.0f;
 	delegate void helper();		//用来提供函数借口的委托函数
 	public SpriteRenderer white,black;
+	public AttackStyle currStyle = AttackStyle.triplet1;
 	
 
 
@@ -41,6 +49,7 @@ public class PlayerControl : MonoBehaviour {
 		Run();
 		Jump();
 		AtkCondition2(attackRange,1);
+		Attack();
 	}
 
 	void LateUpdate () {
@@ -107,19 +116,44 @@ public class PlayerControl : MonoBehaviour {
 
 	private void AtkCondition2(float _range,float _angle)  
 	{  
-		if(Input.GetButtonDown("Fire1"))
-		{// 球形射线检测周围怪物，不用循环所有怪物类列表，无法获取“Enemy”类  
-			Collider[] colliderArr = Physics.OverlapSphere(transform.position, _range, LayerMask.GetMask("Enemy"));  
-			for (int i = 0; i < colliderArr.Length; i++)  
+		// 球形射线检测周围怪物，不用循环所有怪物类列表，无法获取“Enemy”类  
+		Collider[] colliderArr = Physics.OverlapSphere(transform.position, _range, LayerMask.GetMask("Enemy"));  
+		for (int i = 0; i < colliderArr.Length; i++)  
+		{  
+			Vector3 v3 = colliderArr[i].gameObject.transform.position - transform.position;  
+			float angle = Vector3.Angle(v3, transform.forward);  
+			if (angle < _angle)  
 			{  
-				Vector3 v3 = colliderArr[i].gameObject.transform.position - transform.position;  
-				float angle = Vector3.Angle(v3, transform.forward);  
-				if (angle < _angle)  
-				{  
-					// 距离和角度条件都满足了  
-				}  
+				// 距离和角度条件都满足了  
 			}  
-		transform.Translate(new Vector3(3.0f,0.0f,0.0f));
+		}  
+	}
+
+	private void Triplet(){
+		float t = Time.realtimeSinceStartup;
+		if(t - triplet2 <= gap & currStyle == AttackStyle.triplet2){
+			triplet3 = t;
+			AtkCondition2(attackRange,1);
+			currStyle = AttackStyle.triplet3;
+			//播放动画3
+		}else if(t-triplet1<=gap & currStyle == AttackStyle.triplet1){
+			triplet2 = t;
+			AtkCondition2(attackRange,1);
+			currStyle = AttackStyle.triplet2;
+			//播放动画2
+		}else{
+			triplet1 = t;
+			AtkCondition2(attackRange,1);
+			currStyle = AttackStyle.triplet1;
+			//播放动画1
 		}
-	}  
+	}
+
+	private void Attack(){
+		if(Input.GetButtonDown("Fire1")){
+			transform.Translate(new Vector3(3.0f,0.0f,0.0f));
+		}else if(Input.GetButtonDown("Fire2")){
+			Triplet();
+		}
+	}
 }
