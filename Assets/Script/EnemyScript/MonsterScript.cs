@@ -6,6 +6,7 @@ public class MonsterScript : MonoBehaviour {
 
 	public int countDown;
 	bool attack = true;
+	public int hp = 10;
 
 	// Use this for initialization
 	void Start () {
@@ -14,7 +15,9 @@ public class MonsterScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		if(hp<=0){
+			Die();
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D Visitor)
@@ -39,5 +42,8 @@ public class MonsterScript : MonoBehaviour {
 			attack = true;
 		}
 	}
-
+	
+	void Die(){
+		Destroy(gameObject);
+	}
 }

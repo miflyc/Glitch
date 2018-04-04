@@ -18,7 +18,7 @@ public class CameraMovement : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		playerX = player.transform.position.x;
 		playerY = player.transform.position.y;
 		if((transform.position.x - playerX)>cameraWidth/8){
