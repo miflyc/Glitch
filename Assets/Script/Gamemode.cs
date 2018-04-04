@@ -7,6 +7,8 @@ public class Gamemode : MonoBehaviour {
 	public bool gameMode = false;
 	MobileGlitchCameraShader glitchShader;
 
+	public int objectCount;
+	public GameObject[] npcs;
 	// Use this for initialization
 	void Start () {
 		gameMode = false;
@@ -24,6 +26,21 @@ public class Gamemode : MonoBehaviour {
 	public void ChangeGameMode(){
 		gameMode=!gameMode;
 		StartCoroutine(GlitchEffect());
+		foreach(GameObject o in npcs){
+			if(o){
+				GameObject inn = o.transform.FindChild("inn").gameObject;
+				GameObject outt = o.transform.FindChild("outt").gameObject;
+				if(inn & outt){
+					if(gameMode == true){
+						outt.SetActive(false);
+						inn.SetActive(true);
+					}else{
+						outt.SetActive(true);
+						inn.SetActive(false);
+					}
+				}
+			}
+		}
 	}
 
 	public void Glitch(){

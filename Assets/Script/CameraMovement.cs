@@ -14,7 +14,7 @@ public class CameraMovement : MonoBehaviour {
 		cameraHeight = orthographicSize * 2;
 		cameraWidth = cameraHeight * aspectRatio;
 		OffsetZ = transform.position.z;
-		transform.Translate(new Vector3((transform.position.x-player.transform.position.x+(cameraWidth/8)),(transform.position.y-player.transform.position.y),0));
+		transform.Translate(new Vector3((transform.position.x-player.transform.position.x+(cameraWidth/8)),(player.transform.position.y - transform.position.y + cameraHeight/6),0));
 	}
 	
 	// Update is called once per frame
@@ -22,9 +22,12 @@ public class CameraMovement : MonoBehaviour {
 		playerX = player.transform.position.x;
 		playerY = player.transform.position.y;
 		if((transform.position.x - playerX)>cameraWidth/8){
-			transform.Translate(new Vector3(playerX + cameraWidth/8-transform.position.x,playerY - transform.position.y,0));
+			transform.Translate(new Vector3(playerX + cameraWidth/8-transform.position.x,0,0));
 		}else if((playerX - transform.position.x)>cameraWidth/8){
-			transform.Translate(new Vector3(playerX - cameraWidth/8 - transform.position.x,playerY - transform.position.y,0));
+			transform.Translate(new Vector3(playerX - cameraWidth/8 - transform.position.x,0,0));
+		}
+		if((transform.position.y - playerY)>cameraHeight/6){
+			transform.Translate(new Vector3(0,playerY - transform.position.y + cameraHeight/6,0));
 		}
 	}
 }
