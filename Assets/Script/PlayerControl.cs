@@ -6,6 +6,7 @@ public class PlayerControl : MonoBehaviour {
 	
 	public float baseSpeed,attackRange,gap;
 	float speed;
+	public int HealthPoint = 10;
 	public Rigidbody2D rb;
 	public GameObject gameController,crasherCollider;
 	public Gamemode gm;
@@ -23,11 +24,16 @@ public class PlayerControl : MonoBehaviour {
 		triplet2,
 		triplet3,
 	}
+	public enum FacingDirection{
+		Left,
+		Right
+	} 
+	public FacingDirection currDir = FacingDirection.Right;
 	public playerStates currState = playerStates.falling;
 	public float jumpForce = 100.0f;
 	delegate void helper();		//用来提供函数借口的委托函数
 	public SpriteRenderer white,black;
-	public AttackStyle currStyle = AttackStyle.triplet1;
+	public AttackStyle nextStyle = AttackStyle.triplet1;
 	
 
 
@@ -40,6 +46,9 @@ public class PlayerControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		ShiftMode();
+		if(HealthPoint<=0){			//死亡
+			Destroy(gameObject);
+		}
 	}
 
 	void FixedUpdate()
@@ -131,20 +140,20 @@ public class PlayerControl : MonoBehaviour {
 
 	private void Triplet(){
 		float t = Time.realtimeSinceStartup;
-		if(t - triplet2 <= gap & currStyle == AttackStyle.triplet2){
+		if(t - triplet2 <= gap & nextStyle == AttackStyle.triplet3){
 			triplet3 = t;
 			AtkCondition2(attackRange,1);
-			currStyle = AttackStyle.triplet3;
+			nextStyle = AttackStyle.triplet1;
 			//播放动画3
-		}else if(t-triplet1<=gap & currStyle == AttackStyle.triplet1){
+		}else if(t-triplet1<=gap & nextStyle == AttackStyle.triplet2){
 			triplet2 = t;
 			AtkCondition2(attackRange,1);
-			currStyle = AttackStyle.triplet2;
+			nextStyle = AttackStyle.triplet3;
 			//播放动画2
 		}else{
 			triplet1 = t;
 			AtkCondition2(attackRange,1);
-			currStyle = AttackStyle.triplet1;
+			nextStyle = AttackStyle.triplet2;
 			//播放动画1
 		}
 	}
@@ -156,4 +165,5 @@ public class PlayerControl : MonoBehaviour {
 			Triplet();
 		}
 	}
+
 }

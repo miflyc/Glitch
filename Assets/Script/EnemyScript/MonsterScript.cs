@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MonsterScript : MonoBehaviour {
-
+	//普通的地面作战怪物
 	public int countDown;
 	public int hp = 10;
 	public float atkRange = 2.0f;
 	public float dashSpeed = 0.3f,deltaSpeed = 0.05f;
 	public GameObject player;
 	float timeCount = 0,nowSpeed;
-	private enum EnemyStates{
+	public enum EnemyStates{
 		Idle,
 		Attacking,
 		Dead,
@@ -32,7 +32,7 @@ public class MonsterScript : MonoBehaviour {
 			Die();
 		}else if(currState == EnemyStates.Attacking){
 			timeCount+=Time.deltaTime;
-			nowSpeed-=Time.deltaTime*deltaSpeed;
+			nowSpeed = Mathf.Lerp(0.0f,dashSpeed,Time.deltaTime);
 			Dash(targetOnYourRight);
 		}
 	}
@@ -43,7 +43,7 @@ public class MonsterScript : MonoBehaviour {
 			if(currState!=EnemyStates.Attacking){
 				Debug.Log("Warning");		//播放准备动画
 				timeCount = 0.0f;
-				nowSpeed = dashSpeed;
+				nowSpeed = 0.0f;
 				Vector3 targetPoint = player.transform.position;
 				targetOnYourRight = false;
 				if(targetPoint.x>transform.position.x)
