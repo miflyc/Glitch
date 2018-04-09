@@ -28,11 +28,11 @@ public class PlayerControl : MonoBehaviour {
 		Left,
 		Right
 	} 
-	public FacingDirection currDir = FacingDirection.Right;
+	public FacingDirection currDir = FacingDirection.Left;
 	public playerStates currState = playerStates.falling;
 	public float jumpForce = 100.0f;
 	delegate void helper();		//用来提供函数借口的委托函数
-	public SpriteRenderer white,black;
+	public GameObject white,black;
 	public AttackStyle nextStyle = AttackStyle.triplet1;
 	
 
@@ -53,6 +53,7 @@ public class PlayerControl : MonoBehaviour {
 
 	void FixedUpdate()
 	{
+		ChangeDir();
 		Move();
 		DoubleClick(KeyCode.F);
 		Run();
@@ -65,8 +66,22 @@ public class PlayerControl : MonoBehaviour {
 		
 	}
 
-	void changeMesh(){				//更换角色外形
-		
+	void ChangeDir(){				//更换角色方向
+		if(Input.GetKey(KeyCode.A)){
+			if(currDir == FacingDirection.Right){
+				currDir = FacingDirection.Left;
+				white.transform.Rotate(new Vector3(0,180,0));
+				black.transform.Rotate(new Vector3(0,180,0));
+				//此处应该转换动画或者把人物模型翻转
+			}
+		}
+		if(Input.GetKey(KeyCode.D)){
+			if(currDir == FacingDirection.Left){
+				currDir = FacingDirection.Right;
+				white.transform.Rotate(new Vector3(0,-180,0));
+				black.transform.Rotate(new Vector3(0,-180,0));
+			}
+		}
 	}
 
 	void Jump(){					//跳跃函数
@@ -115,11 +130,11 @@ public class PlayerControl : MonoBehaviour {
 
 	void ShiftMode(){
 		if(gm.gameMode == true){
-			black.enabled = false;
-			white.enabled = true;
+			black.SetActive(false);
+			white.SetActive(true);
 		}else{
-			black.enabled = true;
-			white.enabled = false;
+			black.SetActive(true);
+			white.SetActive(false);
 		}
 	}
 
