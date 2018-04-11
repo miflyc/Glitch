@@ -6,22 +6,21 @@ public class MonsterScript : MonoBehaviour {
 	//普通的地面作战怪物
 	public int countDown;
 	public int hp = 10;
-	public float atkRange = 2.0f;
-	public float dashSpeed = 0.3f,deltaSpeed = 0.05f;
+	public float dashSpeed,accleration,dashTime,atkRange;
 	public GameObject player;
-	float timeCount = 0,nowSpeed;
 	public enum EnemyStates{
 		Idle,
 		Attacking,
+		Preparing,
 		Dead,
 	}
 	private EnemyStates currState;
-	bool targetOnYourRight;
+	float nowSpeed,timeCount,rangeCount;
+	float targetOnYourRight;
 
 	// Use this for initialization
 	void Start () {
 		currState = EnemyStates.Idle;
-		nowSpeed = dashSpeed;
 		player = GameObject.FindGameObjectWithTag("Player");
 	}
 	
@@ -31,9 +30,7 @@ public class MonsterScript : MonoBehaviour {
 			currState = EnemyStates.Dead;
 			Die();
 		}else if(currState == EnemyStates.Attacking){
-			timeCount+=Time.deltaTime;
-			nowSpeed = Mathf.Lerp(0.0f,dashSpeed,Time.deltaTime);
-			Dash(targetOnYourRight);
+			Dash(targetOnYourRight,nowSpeed);
 		}
 	}
 
@@ -42,12 +39,10 @@ public class MonsterScript : MonoBehaviour {
 		if(Visitor.gameObject.tag == "PlayerField"){
 			if(currState!=EnemyStates.Attacking){
 				Debug.Log("Warning");		//播放准备动画
-				timeCount = 0.0f;
-				nowSpeed = 0.0f;
 				Vector3 targetPoint = player.transform.position;
-				targetOnYourRight = false;
+				targetOnYourRight = 1;
 				if(targetPoint.x>transform.position.x)
-					targetOnYourRight = true;
+					targetOnYourRight = 0;
 				StartCoroutine(Attack(countDown));
 			}
 		}
@@ -56,13 +51,16 @@ public class MonsterScript : MonoBehaviour {
 	
 	IEnumerator Attack(int times){
 		if(times>0){
-			currState = EnemyStates.Attacking;
+			currState = EnemyStates.Preparing;
 			Debug.Log(times);
 			yield return new WaitForSeconds(1);
 			StartCoroutine(Attack(times-1));
 		}else{
 			Debug.Log("Attack");			//修改为怪物的攻击方式
-			currState = EnemyStates.Idle;
+			nowSpeed = 0.0f;
+			timeCount = 0.0f;
+			rangeCount = 0.0f;
+			currState = EnemyStates.Attacking;
 		}
 	}
 	
@@ -70,12 +68,18 @@ public class MonsterScript : MonoBehaviour {
 		Destroy(gameObject);
 	}
 
-	void Dash(bool targetOnYourRight){
+	void Dash(float targetOnYourRight,float Speed){
 		Debug.Log("Dash");
-		if(targetOnYourRight){
-			transform.Translate(Vector3.Lerp(new Vector3(0,0,0),new Vector3(atkRange,0,0),Mathf.Clamp(timeCount*nowSpeed,0.0f,1.0f)));
+		if(timeCount>=dashTime||rangeCount>=atkRange){
+			currState = EnemyStates.Idle;
+			return;
+		}else if(Speed<dashSpeed){
+			transform.Translate(new Vector3(Speed*Time.deltaTime*Mathf.Pow(-1,targetOnYourRight),0,0));
 		}else{
-			transform.Translate(Vector3.Lerp(new Vector3(0,0,0),new Vector3(-atkRange,0,0),Mathf.Clamp(timeCount*nowSpeed,0.0f,1.0f)));
+			transform.Translate(new Vector3(dashSpeed*Time.deltaTime*Mathf.Pow(-1,targetOnYourRight),0,0));
 		}
+		nowSpeed+=accleration*Time.deltaTime;
+		timeCount+=Time.deltaTime;
+		rangeCount+= Speed*Time.deltaTime;
 	}
 }

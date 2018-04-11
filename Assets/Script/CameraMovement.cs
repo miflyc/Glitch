@@ -14,7 +14,7 @@ public class CameraMovement : MonoBehaviour {
 		cameraHeight = orthographicSize * 2;
 		cameraWidth = cameraHeight * aspectRatio;
 		OffsetZ = transform.position.z;
-		transform.Translate(new Vector3((transform.position.x-player.transform.position.x+(cameraWidth/8)),(player.transform.position.y - transform.position.y + cameraHeight/6),0));
+		transform.Translate(new Vector3((transform.position.x-player.transform.position.x+(cameraWidth/8)),(player.transform.position.y - transform.position.y + cameraHeight/4),0));
 	}
 	
 	// Update is called once per frame
@@ -26,8 +26,15 @@ public class CameraMovement : MonoBehaviour {
 		}else if((playerX - transform.position.x)>cameraWidth/8){
 			transform.Translate(new Vector3(playerX - cameraWidth/8 - transform.position.x,0,0));
 		}
-		if((transform.position.y - playerY)>cameraHeight/6){
-			transform.Translate(new Vector3(0,playerY - transform.position.y + cameraHeight/6,0));
+		if((transform.position.y - playerY)>cameraHeight/4){
+			transform.Translate(new Vector3(0,playerY - transform.position.y + cameraHeight/4,0));
+		}
+	}
+
+	void Update()
+	{
+		if(Input.GetKeyUp(KeyCode.Escape)){
+			Application.Quit();
 		}
 	}
 }

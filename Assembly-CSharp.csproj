@@ -49,12 +49,10 @@
      <Compile Include="Assets\GlitchyShaderAssets\Scripts\GlitchCameraShader.cs" />
      <Compile Include="Assets\GlitchyShaderAssets\Scripts\MobileGlitchCameraShader.cs" />
      <Compile Include="Assets\GlitchyShaderAssets\Scripts\SimpleRotator.cs" />
-     <Compile Include="Assets\Script\Camera2DFollow.cs" />
      <Compile Include="Assets\Script\CameraMovement.cs" />
      <Compile Include="Assets\Script\EnemyScript\Bullet.cs" />
      <Compile Include="Assets\Script\EnemyScript\FlyingMonster.cs" />
      <Compile Include="Assets\Script\EnemyScript\MonsterScript.cs" />
-     <Compile Include="Assets\Script\GameControl.cs" />
      <Compile Include="Assets\Script\Gamemode.cs" />
      <Compile Include="Assets\Script\NPCListener.cs" />
      <Compile Include="Assets\Script\PlayerControl.cs" />
