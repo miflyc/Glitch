@@ -13,7 +13,6 @@ public class CameraMovement : MonoBehaviour {
 		aspectRatio = Screen.width * 1.0f / Screen.height;
 		cameraHeight = orthographicSize * 2;
 		cameraWidth = cameraHeight * aspectRatio;
-		OffsetZ = transform.position.z;
 		transform.Translate(new Vector3((transform.position.x-player.transform.position.x+(cameraWidth/8)),(player.transform.position.y - transform.position.y + cameraHeight/4),0));
 	}
 	

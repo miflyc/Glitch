@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glitch", "Assembly-CSharp-firstpass.csproj", "{D22D531A-07A5-A338-5293-740473F62AF1}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glitch", "Assembly-CSharp.csproj", "{9778B948-5F66-51B8-1A1B-92D98A42F29D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glitch", "Assembly-CSharp-Editor-firstpass.csproj", "{05095140-B5ED-763A-513E-052864E21B42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +13,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D22D531A-07A5-A338-5293-740473F62AF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D22D531A-07A5-A338-5293-740473F62AF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D22D531A-07A5-A338-5293-740473F62AF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D22D531A-07A5-A338-5293-740473F62AF1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9778B948-5F66-51B8-1A1B-92D98A42F29D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9778B948-5F66-51B8-1A1B-92D98A42F29D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9778B948-5F66-51B8-1A1B-92D98A42F29D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9778B948-5F66-51B8-1A1B-92D98A42F29D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05095140-B5ED-763A-513E-052864E21B42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05095140-B5ED-763A-513E-052864E21B42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05095140-B5ED-763A-513E-052864E21B42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05095140-B5ED-763A-513E-052864E21B42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
