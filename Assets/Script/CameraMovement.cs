@@ -31,6 +31,10 @@ public class CameraMovement : MonoBehaviour {
 			transform.Translate(new Vector3(playerX + cameraWidth/8-transform.position.x,0,0));
 		}else if((playerX - transform.position.x)>cameraWidth/8 &playerX<Xmax+cameraWidth/8){
 			transform.Translate(new Vector3(playerX - cameraWidth/8 - transform.position.x,0,0));
+		}else if(playerX>Xmax){
+			transform.Translate(new Vector3(Xmax - transform.position.x,0,0));
+		}else if(playerX<Xmin){
+			transform.Translate(new Vector3(Xmin - transform.position.x,0,0));
 		}
 
 		if(transform.position.y<Ymin ){
