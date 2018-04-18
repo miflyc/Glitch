@@ -12,11 +12,13 @@ public class PlayerControl : MonoBehaviour {
 	public Gamemode gm;
 	float t1,t2;		//用来判断双击的时间，其中t2用来显示当前的时间，t1用来保存第一次敲击的时
 	float triplet1,triplet2,triplet3;	//三段斩时间判定
+	public Animator innAnim,outtAnim;
 	public enum playerStates{		//角色状态机
 		jump,
 		falling,
 		landing,
-		running
+		running,
+		idle
 	}
 	public enum AttackStyle{
 		rua,
@@ -29,7 +31,7 @@ public class PlayerControl : MonoBehaviour {
 		Right
 	} 
 	public FacingDirection currDir = FacingDirection.Left;
-	public playerStates currState = playerStates.falling;
+	public playerStates currState = playerStates.falling,lastState = playerStates.falling;
 	public float jumpForce = 100.0f;
 	delegate void helper();		//用来提供函数借口的委托函数
 	public GameObject white,black;
@@ -87,7 +89,7 @@ public class PlayerControl : MonoBehaviour {
 	void Jump(){					//跳跃函数
 		if(currState!=playerStates.falling){	
 			if(Input.GetKeyDown(KeyCode.W)){
-			currState = playerStates.jump;
+			ChangeState(playerStates.jump);
 			}
 		}
 	}
@@ -114,18 +116,18 @@ public class PlayerControl : MonoBehaviour {
 	}
 
 	void Run(){
-		if(currState == playerStates.landing){
-			if(DoubleClick(KeyCode.D)||DoubleClick(KeyCode.A)){
-				speed = baseSpeed*2;
-				currState = playerStates.running;
-				Debug.Log(currState);
-			}
-		}else if(currState == playerStates.running){
-			if(Input.GetKeyUp(KeyCode.D)||Input.GetKeyUp(KeyCode.A)){
-				currState = playerStates.landing;
-				speed = baseSpeed;
-			}
+		if(DoubleClick(KeyCode.A)||DoubleClick(KeyCode.D)){
+			ChangeState(playerStates.running);
+			outtAnim.SetBool("Running",true);
+		}else if(!Input.GetKey(KeyCode.A) & !Input.GetKey(KeyCode.D)){
+			if(lastState!=playerStates.running)
+				ChangeState(lastState);
+			outtAnim.SetBool("Running",false);
 		}
+		if(currState == playerStates.running)
+			speed = baseSpeed*2;
+		else if(currState == playerStates.landing)
+			speed = baseSpeed;
 	}
 
 	void ShiftMode(){
@@ -185,6 +187,11 @@ public class PlayerControl : MonoBehaviour {
 		}else if(Input.GetButtonDown("Fire2")){
 			Triplet();
 		}
+	}
+
+	void ChangeState(playerStates nextState){
+		lastState = currState;
+		currState = nextState;
 	}
 
 }
