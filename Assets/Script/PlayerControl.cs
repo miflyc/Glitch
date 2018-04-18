@@ -138,7 +138,7 @@ public class PlayerControl : MonoBehaviour {
 		}
 	}
 
-	private void AtkCondition2(float _range,float _angle)  
+	private void AtkCondition2(float _range,float _angle,int power = 5)  
 	{  
 		// 球形射线检测周围怪物，不用循环所有怪物类列表，无法获取“Enemy”类  
 		Collider[] colliderArr = Physics.OverlapSphere(transform.position, _range, LayerMask.GetMask("Enemy"));  
@@ -148,7 +148,8 @@ public class PlayerControl : MonoBehaviour {
 			float angle = Vector3.Angle(v3, transform.forward);  
 			if (angle < _angle)  
 			{  
-				// 距离和角度条件都满足了  
+				MonsterScript mons = colliderArr[i].gameObject.GetComponent<MonsterScript>();
+				mons.hp -= power;
 			}  
 		}  
 	}
@@ -175,7 +176,12 @@ public class PlayerControl : MonoBehaviour {
 
 	private void Attack(){
 		if(Input.GetButtonDown("Fire1")){
-			transform.Translate(new Vector3(3.0f,0.0f,0.0f));
+			int dir;
+			if(currDir == FacingDirection.Left)
+				dir = 1;
+			else
+				dir = 0;
+			transform.Translate(new Vector3(3.0f*Mathf.Pow(-1,dir),0.0f,0.0f));
 		}else if(Input.GetButtonDown("Fire2")){
 			Triplet();
 		}
