@@ -16,7 +16,6 @@ public class PlayerStateListener : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		currState = playerControl.currState;
-		jump();
 	}
 
 	void OnTriggerEnter2D(Collider2D collidedObject)
@@ -42,9 +41,5 @@ public class PlayerStateListener : MonoBehaviour {
 		}
 	}
 
-	void jump(){
-		if(currState == PlayerControl.playerStates.jump){
-			playerControl.rb.AddForce(new Vector2(0,playerControl.jumpForce));
-		}
-	}
+	
 }

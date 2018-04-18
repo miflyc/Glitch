@@ -14,7 +14,6 @@ public class PlayerControl : MonoBehaviour {
 	float triplet1,triplet2,triplet3;	//三段斩时间判定
 	public Animator innAnim,outtAnim;
 	public enum playerStates{		//角色状态机
-		jump,
 		falling,
 		landing,
 		running,
@@ -89,7 +88,8 @@ public class PlayerControl : MonoBehaviour {
 	void Jump(){					//跳跃函数
 		if(currState!=playerStates.falling){	
 			if(Input.GetKeyDown(KeyCode.W)){
-			ChangeState(playerStates.jump);
+			//ChangeState(playerStates.jump);
+			rb.AddForce(new Vector2(0,jumpForce),ForceMode2D.Impulse);
 			}
 		}
 	}
