@@ -126,7 +126,7 @@ public class PlayerControl : MonoBehaviour {
 		}
 		if(currState == playerStates.running)
 			speed = baseSpeed*2;
-		else if(currState == playerStates.landing)
+		else if(currState == playerStates.idle)
 			speed = baseSpeed;
 	}
 
@@ -190,8 +190,10 @@ public class PlayerControl : MonoBehaviour {
 	}
 
 	void ChangeState(playerStates nextState){
+		if(currState!=nextState){
 		lastState = currState;
 		currState = nextState;
+		}
 	}
 
 }
