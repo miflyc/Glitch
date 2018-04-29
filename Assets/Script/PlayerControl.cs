@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour {
 	
 	public float baseSpeed,attackRange,gap;
 	float speed;
 	public int HealthPoint = 10;
+    public int CurrentHealth;
+    public Slider HealthPointUi;
 	public Rigidbody2D rb;
 	public GameObject gameController,crasherCollider;
 	public Gamemode gm;
@@ -47,6 +50,7 @@ public class PlayerControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		ShiftMode();
+        HealthPointUi.value = CurrentHealth/HealthPoint;
 		if(HealthPoint<=0){			//死亡
 			Destroy(gameObject);
 		}
