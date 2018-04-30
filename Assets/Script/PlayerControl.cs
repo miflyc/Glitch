@@ -75,15 +75,15 @@ public class PlayerControl : MonoBehaviour {
 		if(Input.GetKey(KeyCode.A)){
 			if(currDir == FacingDirection.Right){
 				currDir = FacingDirection.Left;
-				white.transform.Rotate(new Vector3(0,180,0));
 				black.transform.Rotate(new Vector3(0,180,0));
+				innAnim.SetBool("PlayerFacingRight",false);
 				//此处应该转换动画或者把人物模型翻转
 			}
 		}
 		if(Input.GetKey(KeyCode.D)){
 			if(currDir == FacingDirection.Left){
 				currDir = FacingDirection.Right;
-				white.transform.Rotate(new Vector3(0,-180,0));
+				innAnim.SetBool("PlayerFacingRight",true);
 				black.transform.Rotate(new Vector3(0,-180,0));
 			}
 		}
@@ -123,10 +123,12 @@ public class PlayerControl : MonoBehaviour {
 		if(DoubleClick(KeyCode.A)||DoubleClick(KeyCode.D)){
 			ChangeState(playerStates.running);
 			outtAnim.SetBool("Running",true);
+			innAnim.SetBool("Running",true);
 		}else if(!Input.GetKey(KeyCode.A) & !Input.GetKey(KeyCode.D)){
 			if(lastState!=playerStates.running)
 				ChangeState(lastState);
 			outtAnim.SetBool("Running",false);
+			innAnim.SetBool("Running",false);
 		}
 		if(currState == playerStates.running)
 			speed = baseSpeed*2;
